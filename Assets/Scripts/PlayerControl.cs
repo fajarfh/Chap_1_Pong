@@ -91,20 +91,41 @@ public class PlayerControl : MonoBehaviour {
 
 			lastContactPoint = collision.GetContact(0);
 
-		} else if(collision.gameObject.name.Equals("Bonus Ball"))
-		{
+		} 
+		//else if(collision.gameObject.name.Equals("Bonus Ball"))
+		//{
 			
-			PowerUp();
-			collision.gameObject.SendMessage("RestartGame", 2.0f, SendMessageOptions.RequireReceiver);
+		//	PowerUp();
+		//	collision.gameObject.SendMessage("RestartGame", 2.0f, SendMessageOptions.RequireReceiver);
 
-		} else if (collision.gameObject.name.Equals("Bomb Ball"))
-		{
+		//} else if (collision.gameObject.name.Equals("Bomb Ball"))
+		//{
 
-			DecreaseScore();
-			collision.gameObject.SendMessage("RestartGame", 2.0f, SendMessageOptions.RequireReceiver);
+		//	DecreaseScore();
+		//	collision.gameObject.SendMessage("RestartGame", 2.0f, SendMessageOptions.RequireReceiver);
 
-		}
+		//}
 	}
+
+	//void OnTriggerEnter(Collider someObject)
+	//{
+		
+	//	if (someObjectgameObject.name.Equals("Bonus Ball"))
+	//	{
+
+	//		someObject.gameObject.SendMessage("PowerUp", 2.0f, SendMessageOptions.RequireReceiver);
+	//		RestartGame();
+
+	//	}
+	//	else if (gameObject.name.Equals("Bomb Ball"))
+	//	{
+
+	//		someObject.gameObject.SendMessage("DecreaseScore", 2.0f, SendMessageOptions.RequireReceiver);
+	//		RestartGame();
+
+	//	}
+		
+	//}
 
 	// Use this for initialization
 	void Start () {

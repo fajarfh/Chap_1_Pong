@@ -4,11 +4,14 @@ public class SideWall : MonoBehaviour {
 
 	// Pemain yang akan bertambah skornya jika bola menyentuh dinding ini.
 	public PlayerControl player;
+	public BallControl bombBall;
+	public BallControl bonusBall;
 
 	// Skrip GameManager untuk mengakses skor maksimal
 	//	public GameManager gameManager; 
 	[SerializeField]
 	private GameManager gameManager;
+
 
 	// Akan dipanggil ketika objek lain ber-collider (bola) bersentuhan dengan dinding.
 	void OnTriggerEnter2D(Collider2D anotherCollider)
@@ -24,6 +27,10 @@ public class SideWall : MonoBehaviour {
 			{
 				// ...restart game setelah bola mengenai dinding.
 				anotherCollider.gameObject.SendMessage("RestartGame", 2.0f, SendMessageOptions.RequireReceiver);
+
+				//comment jika ingin bomb ball dan bonus ball ga ke reset pas bola masuk
+				bonusBall.gameObject.SendMessage("RestartGame", 2.0f, SendMessageOptions.RequireReceiver);
+				bombBall.gameObject.SendMessage("RestartGame", 2.0f, SendMessageOptions.RequireReceiver);
 			}
 		} else
 		{
@@ -33,13 +40,4 @@ public class SideWall : MonoBehaviour {
 		}
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

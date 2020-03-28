@@ -10,6 +10,7 @@ public class BallControl : MonoBehaviour {
 	public float yInitialForce;
 	public float initSpeed;
 
+
 	// RESET BOLA
 	void ResetBall()
 	{
@@ -46,7 +47,7 @@ public class BallControl : MonoBehaviour {
 	}
 
 	// ACTIVATE BALLS
-	void activ8()
+	void Activ8()
 	{
 		gameObject.SetActive(true);
 		PushBall();
@@ -66,21 +67,21 @@ public class BallControl : MonoBehaviour {
 		// Setelah 2 detik, berikan gaya ke bola
 		if (gameObject.name == "Ball")
 		{
+
 			Invoke("PushBall", 2);
 		}
 		else if (gameObject.name == "Bonus Ball")
 		{
 			gameObject.SetActive(false);
-			Invoke("activ8", 10);
+			Invoke("Activ8", 10);
 		}
 		else if (gameObject.name == "Bomb Ball")
 		{
 			gameObject.SetActive(false);
-			Invoke("activ8", 14);
+			Invoke("Activ8", 14);
 		}
 
-
-		}
+	}
 
 
 	// DEBUG
@@ -99,19 +100,37 @@ public class BallControl : MonoBehaviour {
 		get { return trajectoryOrigin; }
 	}
 
+	//Ganti dari collision ke trigger untuk bomb dan bonus ball
+	void OnTriggerEnter2D(Collider2D someObject)
+	{
+		if (someObject.gameObject.name.Contains("Player"))
+		{
+			if (gameObject.name.Equals("Bonus Ball"))
+			{
+
+				someObject.gameObject.SendMessage("PowerUp", 2.0f, SendMessageOptions.RequireReceiver);
+				RestartGame();
+
+			}
+			else if (gameObject.name.Equals("Bomb Ball"))
+			{
+
+				someObject.gameObject.SendMessage("DecreaseScore", 2.0f, SendMessageOptions.RequireReceiver);
+				RestartGame();
+
+			}
+		}
+	}
+
+
 	// Use this for initialization
 	void Start () {
 		rigidBody2D = GetComponent<Rigidbody2D>();
 
 		trajectoryOrigin = transform.position;
-
+		
 		// Mulai game
 		RestartGame();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 }
